@@ -1,4 +1,31 @@
-.test {
-    font-size: 400px;
-    color: red;
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text:400,700&display=swap');
+
+/* Helper classes */
+
+.bg-color {
+    font-family: 'Crimson Text', serif;
+    background-color: #d6d6d6f7;
+    min-height: 100vh;
+}
+
+
+/* Headers */
+
+.title {
+    font-size: 12rem;
+    color: #1b1c1d;
+}
+
+.break1 {
+    width: 370px;
+    height: 2px;
+    border: 0;
+    background-color: #41292B;
+}
+
+/* Forms */
+
+.name-form {
+    display: inline-block;
+    width: 33%;
 }

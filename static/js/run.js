@@ -1,5 +1,12 @@
 $(document).ready(function() {
   
+  // Game Flow
+  
+  $("#name-sumbit").click(function() {
+    var playerName = $("#player-name").val() 
+    alert("Your Name Is: " + playerName);
+  });
+  
   // Die Rolls
   
   $("#rollD4").click(function() {
@@ -44,11 +51,11 @@ $(document).ready(function() {
     var d12 = getDieResult("#d12");
     var d20 = getDieResult("#d20");
     
-    var result = d4 + d6 + d8 + d10 + d12 + d20;
+    var total = d4 + d6 + d8 + d10 + d12 + d20;
     
-    console.log(result);
+    console.log(total);
     
-    $("#total").text(result);
+    $("#total").text(total);
   });
   
   // Helper functions 

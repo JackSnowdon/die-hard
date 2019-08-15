@@ -12,69 +12,88 @@
 </head>
 
 <body>
-
-    <div class="container text-center">
-        <div class="jumbotron">
-            <div class="row">
-                <div class="col-4">
-                    <button type="button" id="rollD4" class="btn btn-success">Roll a D4!</button>
-                </div>
-                <div class="col-4">
-                    <button type="button" id="rollD6" class="btn btn-success">Roll a D6!</button>
-                </div>
-                <div class="col-4">
-                    <button type="button" id="rollD8" class="btn btn-success">Roll a D8!</button>
+    <div class="bg-color">
+        <div class="container">
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="title">Dice Fight</h1>
+                        <hr class="break1">
+                    </div>
                 </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-4">
-                    <span id="d4"></span>
+            <div class="jumbotron text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="h3">Welcome to Dice Fight! To get started, what is your name?</div>
+                        <div class="name-form">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="player-name" placeholder="Name">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" id="name-sumbit" type="button">Sumbit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <span id="d6"></span>
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" id="rollD4" class="btn btn-success">Roll a D4!</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="rollD6" class="btn btn-success">Roll a D6!</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="rollD8" class="btn btn-success">Roll a D8!</button>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <span id="d8"></span>
+                <br>
+                <div class="row">
+                    <div class="col-4">
+                        <span id="d4"></span>
+                    </div>
+                    <div class="col-4">
+                        <span id="d6"></span>
+                    </div>
+                    <div class="col-4">
+                        <span id="d8"></span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" id="rollD10" class="btn btn-success">Roll a D10!</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="rollD12" class="btn btn-success">Roll a D12!</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="rollD20" class="btn btn-success">Roll a D20!</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-4">
+                        <span id="d10"></span>
+                    </div>
+                    <div class="col-4">
+                        <span id="d12"></span>
+                    </div>
+                    <div class="col-4">
+                        <span id="d20"></span>
+                    </div>
                 </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-4">
-                    <button type="button" id="rollD10" class="btn btn-success">Roll a D10!</button>
+            <div class="row text-center">
+                <div class="col-12">
+                    <button type="button" id="totalButton" class="btn btn-success">Total</button>
                 </div>
-                <div class="col-4">
-                    <button type="button" id="rollD12" class="btn btn-success">Roll a D12!</button>
-                </div>
-                <div class="col-4">
-                    <button type="button" id="rollD20" class="btn btn-success">Roll a D20!</button>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-4">
-                    <span id="d10"></span>
-                </div>
-                <div class="col-4">
-                    <span id="d12"></span>
-                </div>
-                <div class="col-4">
-                    <span id="d20"></span>
+                <br>
+                <div class="col-12">
+                    <span id="total"></span>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <button type="button" id="totalButton" class="btn btn-success">Total</button>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-12">
-                <span id="total"></span>
-            </div>
-        </div>
-    </div>
     </div>
 
     <!--- Scripts --->
