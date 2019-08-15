@@ -23,6 +23,10 @@
     background-color: #41292B;
 }
 
+#name-tag {
+    display: none;
+}
+
 /* Forms */
 
 .name-form {

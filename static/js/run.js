@@ -3,14 +3,17 @@ $(document).ready(function() {
   // Game Flow
 
   var player = new Object();
-  
+
   $("#name-sumbit").click(function() {
-
-
     var playerName = $("#player-name").val()
     player.name = playerName;
-    alert("Your Name Is: " + player.name);
-    console.log(player);
+    
+    console.log(player, player.name);
+
+    if (typeof player.name !== "undefined") {
+      $("#p-name").text(player.name);
+      $("#name-tag").show();
+    }
   });
 
   // Die Rolls
@@ -20,7 +23,8 @@ $(document).ready(function() {
     $("#d4").text(result);
     if (typeof player.name !== "undefined") {
       alert(player.name + " Rolled: " + result);
-    } else return;
+    }
+    else return;
   });
 
   $("#rollD6").click(function() {
@@ -79,5 +83,9 @@ $(document).ready(function() {
     var diceRoll = Math.floor(Math.random() * x) + 1;
     return diceRoll;
   }
+
+  // Display Helpers 
+
+
 
 });
