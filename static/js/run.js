@@ -11,9 +11,11 @@ $(document).ready(function() {
     console.log(player, player.name);
 
     if (typeof player.name !== "undefined") {
-      $("#p-name").text(player.name);
-      $("#name-tag").show();
+      $(".p-name").text(player.name);
+      $(".name-tag").show();
+      $("#name-entry").hide();
     }
+    
   });
 
   // Die Rolls
