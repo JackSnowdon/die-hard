@@ -1,40 +1,62 @@
 $(document).ready(function() {
   
+  // Die Rolls
+  
   $("#rollD4").click(function() {
     var result = getDiceRoll(4);
     $("#d4").text(result);
-    console.log(result);
   });
 
   $("#rollD6").click(function() {
     var result = getDiceRoll(6);
     $("#d6").text(result);
-    console.log(result);
   });
   
   $("#rollD8").click(function() {
     var result = getDiceRoll(8);
     $("#d8").text(result);
-    console.log(result);
   });
   
   $("#rollD10").click(function() {
     var result = getDiceRoll(10);
     $("#d10").text(result);
-    console.log(result);
   });
   
   $("#rollD12").click(function() {
     var result = getDiceRoll(12);
     $("#d12").text(result);
-    console.log(result);
   });
   
   $("#rollD20").click(function() {
     var result = getDiceRoll(20);
     $("#d20").text(result);
-    console.log(result);
   });
+  
+  // Die Totals
+  
+  $("#totalButton").click(function() {
+    
+    
+    var d4 = getDieResult("#d4");
+    var d6 = getDieResult("#d6");
+    var d8 = getDieResult("#d8");
+    var d10 = getDieResult("#d10");
+    var d12 = getDieResult("#d12");
+    var d20 = getDieResult("#d20");
+    
+    var result = d4 + d6 + d8 + d10 + d12 + d20;
+    
+    console.log(result);
+    
+    $("#total").text(result);
+  });
+  
+  // Helper functions 
+  
+  function getDieResult(x) {
+    var d = parseInt($(x).text());
+    return d;
+  }
   
   
   function getDiceRoll(x) {
