@@ -27,6 +27,12 @@
     display: none;
 }
 
+/* Die Rolls */
+
+.die-value {
+    font-size: 3rem;
+}
+
 /* Forms */
 
 .name-form {

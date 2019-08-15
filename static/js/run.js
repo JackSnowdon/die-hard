@@ -7,7 +7,7 @@ $(document).ready(function() {
   $("#name-sumbit").click(function() {
     var playerName = $("#player-name").val()
     player.name = playerName;
-    
+
     console.log(player, player.name);
 
     if (typeof player.name !== "undefined") {
@@ -15,7 +15,7 @@ $(document).ready(function() {
       $(".name-tag").show();
       $("#name-entry").hide();
     }
-    
+
   });
 
   // Die Rolls
@@ -71,6 +71,10 @@ $(document).ready(function() {
     console.log(total);
 
     $("#total").text(total);
+    if (typeof player.name !== "undefined") {
+      alert(player.name + " Rolled: " + total);
+    }
+    else return;
   });
 
   // Helper functions 
