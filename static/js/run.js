@@ -5,23 +5,26 @@ $(document).ready(function() {
   var player = new Object();
 
   $("#name-sumbit").click(function() {
-    
+
     // Checks name has value (Trimmed in case of whitespace)
-    
+
     var playerName = $("#player-name").val()
-    
-    if ($.trim(playerName) == ''){
+
+    if ($.trim(playerName) == '') {
       alert('You surely must have a name!');
-    } else
-    
+    }
+
     player.name = playerName;
 
     console.log(player, player.name);
+    
+    // Hide entry form and displays users choice 
 
     if (typeof player.name !== "undefined") {
       $(".p-name").text(player.name);
-      $(".name-tag").show();
-      $("#name-entry").hide();
+      $("#name-entry").fadeOut("slow", function() {
+        $(".name-tag").fadeIn("slow");
+      });
     }
 
   });
@@ -34,7 +37,6 @@ $(document).ready(function() {
     if (typeof player.name !== "undefined") {
       alert(player.name + " Rolled: " + result);
     }
-    else return;
   });
 
   $("#rollD6").click(function() {
