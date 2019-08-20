@@ -1,8 +1,16 @@
 $(document).ready(function() {
 
-  // Game Flow
+  // Global Vars
 
   var player = new Object();
+
+  var enemy = new Object();
+  enemy.name = "Steve";
+
+
+  // Game Flow
+  
+  // Name Entry
 
   $("#name-sumbit").click(function() {
 
@@ -17,17 +25,36 @@ $(document).ready(function() {
     player.name = playerName;
 
     console.log(player, player.name);
-    
+
     // Hide entry form and displays users choice 
 
     if (typeof player.name !== "undefined") {
       $(".p-name").text(player.name);
       $("#name-entry").fadeOut("slow", function() {
-        $(".name-tag").fadeIn("slow");
+        $(".hide-on-start").fadeIn("slow");
       });
     }
 
   });
+  
+  // Start Game
+
+  $("#start-game").click(function() {
+    $("#start-game").hide()
+    var enemyRoll = easyEnemyRoll(6, 8);
+    console.log(enemyRoll);
+    $("#enemyRoll1").text(enemyRoll);
+    $(".enemy-roll").fadeIn("slow");
+  });
+  
+  // Enemy Rolls 
+  
+  function easyEnemyRoll(a, b) {
+    var die1 = getDiceRoll(a);
+    var die2 = getDiceRoll(b);
+    var enemyRoll = die1 + die2;
+    return enemyRoll;
+  }
 
   // Die Rolls
 

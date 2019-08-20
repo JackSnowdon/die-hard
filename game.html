@@ -20,15 +20,11 @@
             </li>
         </ul>
         <span class="navbar-text">
-            <div class="name-tag">Logged in as <span class="p-name font-weight-bold"></span></div>
+            <div class="hide-on-start">Logged in as <span class="p-name font-weight-bold"></span></div>
         </span>
     </nav>
 
     <div class="bg-color">
-
-
-
-
         <div class="container">
 
             <!--- Header --->
@@ -40,15 +36,11 @@
                         <hr class="break1">
                     </div>
                 </div>
-            </div>
 
-            <!--- Main Content --->
+                <!--- Intro, form for name entry --->
 
-            <div class="jumbotron text-center">
                 <div class="row">
                     <div class="col-12">
-
-                        <!--- Intro, form for name entry --->
                         <div id="name-entry">
                             <h3>Welcome to Dice Fight! To get started, what is your name?</h3>
                             <div class="name-form">
@@ -63,12 +55,24 @@
 
                         <!--- Sucessful name entry --->
 
-                        <h3 class="name-tag">Hello <span class="p-name"></span>!</h3>
-
-
+                        <h3 class="hide-on-start">Hello <span class="p-name"></span>!</h3>
+                        <hr class="break2">
+                        <div class="hide-on-start">
+                            <button class="btn btn-outline-success" id="start-game" type="button">Start Game</button>
+                        </div>
                     </div>
                 </div>
-                <br>
+            </div>
+
+            <div class="game-content text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="enemy-roll">Enemy Rolled: <span id="enemyRoll1"></span></h3>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="jumbotron text-center">
 
                 <!--- Die Rolls --->
 

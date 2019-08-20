@@ -9,12 +9,22 @@
 }
 
 
-/* Headers */
+.hide-on-start {
+    display: none;
+}
+
+.enemy-roll {
+    display: none;
+}
+
+/* Header */
 
 .title {
     font-size: 12rem;
     color: #1b1c1d;
 }
+
+/* Breaks */
 
 .break1 {
     width: 370px;
@@ -23,8 +33,23 @@
     background-color: #41292B;
 }
 
-.name-tag {
-    display: none;
+.break2 {
+    width: 370px;
+    height: 1px;
+    border: 0;
+    background-color: #41292B;
+}
+
+
+#start-game {
+    padding: .5rem 3rem;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    border-radius: .45rem;
+    transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
 }
 
 /* Die Rolls */
@@ -39,4 +64,3 @@
     display: inline-block;
     width: 33%;
 }
-
