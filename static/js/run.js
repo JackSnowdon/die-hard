@@ -57,11 +57,11 @@ $(document).ready(function() {
       $("#player-result").text(playerRoll);
       if (enemy.enemyRoll > player.playerRoll) {
         $("#result").text("You Loser!");
-        $("#result").fadeIn("slow");
+        $("#result").fadeIn("slow").css("color", "red");
       }
       else if (enemy.enemyRoll < player.playerRoll) {
         $("#result").text("You winner!");
-        $("#result").fadeIn("slow");
+        $("#result").fadeIn("slow".css("color", "green"));
       }
       else {
         $("#result").text("You draw!");
