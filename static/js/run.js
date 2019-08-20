@@ -5,7 +5,15 @@ $(document).ready(function() {
   var player = new Object();
 
   $("#name-sumbit").click(function() {
+    
+    // Checks name has value (Trimmed in case of whitespace)
+    
     var playerName = $("#player-name").val()
+    
+    if ($.trim(playerName) == ''){
+      alert('You surely must have a name!');
+    } else
+    
     player.name = playerName;
 
     console.log(player, player.name);
