@@ -59,13 +59,13 @@ $(document).ready(function() {
         $("#result").text("You Loser!");
         $("#result").fadeIn("slow").css("color", "red");
       }
-      else if (enemy.enemyRoll < player.playerRoll) {
-        $("#result").text("You winner!");
-        $("#result").fadeIn("slow".css("color", "green"));
-      }
-      else {
+      else if (enemy.enemyRoll == player.playerRoll) {
         $("#result").text("You draw!");
         $("#result").fadeIn("slow");
+      }
+      else {
+        $("#result").text("You winner!");
+        $("#result").fadeIn("slow").css("color", "green");
       }
     });
 
