@@ -9,32 +9,29 @@
 }
 
 
-.hide-on-start {
+.hide-on-start, .enemy-roll, .player-roll, #result {
     display: none;
 }
 
-.enemy-roll {
-    display: none;
-}
 
 /* Header */
 
 .title {
-    font-size: 12rem;
+    font-size: 9rem;
     color: #1b1c1d;
 }
 
 /* Breaks */
 
 .break1 {
-    width: 370px;
+    width: 275px;
     height: 2px;
     border: 0;
     background-color: #41292B;
 }
 
 .break2 {
-    width: 370px;
+    width: 275px;
     height: 1px;
     border: 0;
     background-color: #41292B;
@@ -63,4 +60,15 @@
 .name-form {
     display: inline-block;
     width: 33%;
+}
+
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+
+    .name-form {
+        width: 66%;
+    }
+
 }

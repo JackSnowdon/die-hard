@@ -7,9 +7,8 @@ $(document).ready(function() {
   var enemy = new Object();
   enemy.name = "Steve";
 
-
   // Game Flow
-  
+
   // Name Entry
 
   $("#name-sumbit").click(function() {
@@ -21,39 +20,67 @@ $(document).ready(function() {
     if ($.trim(playerName) == '') {
       alert('You surely must have a name!');
     }
+    else {
+      player.name = playerName;
+      console.log(player, player.name);
 
-    player.name = playerName;
+      // Hide entry form and displays players name 
 
-    console.log(player, player.name);
-
-    // Hide entry form and displays users choice 
-
-    if (typeof player.name !== "undefined") {
-      $(".p-name").text(player.name);
-      $("#name-entry").fadeOut("slow", function() {
-        $(".hide-on-start").fadeIn("slow");
-      });
+      if (typeof player.name !== "undefined") {
+        $(".p-name").text(player.name);
+        $("#name-entry").fadeOut("slow", function() {
+          $(".hide-on-start").fadeIn("slow");
+        });
+      }
     }
 
   });
-  
+
   // Start Game
 
   $("#start-game").click(function() {
     $("#start-game").hide()
-    var enemyRoll = easyEnemyRoll(6, 8);
+    var enemyRoll = rollTwoDie(6, 8);
+    enemy.enemyRoll = enemyRoll
     console.log(enemyRoll);
-    $("#enemyRoll1").text(enemyRoll);
-    $(".enemy-roll").fadeIn("slow");
+    $("#enemy-result").text(enemyRoll);
+    $(".enemy-roll").fadeIn("slow", function() {
+      $(".player-roll").fadeIn("slow");
+    });
   });
-  
+
+  $("#testRoll").click(function() {
+    var playerRoll = rollTwoDie(6, 8);
+    player.playerRoll = playerRoll;
+    console.log(player.playerRoll, enemy.enemyRoll);
+    $("#testRoll").fadeOut("slow", function() {
+      $("#player-result").text(playerRoll);
+      if (enemy.enemyRoll > player.playerRoll) {
+        $("#result").text("You Loser!");
+        $("#result").fadeIn("slow");
+      }
+      else if (enemy.enemyRoll < player.playerRoll) {
+        $("#result").text("You winner!");
+        $("#result").fadeIn("slow");
+      }
+      else {
+        $("#result").text("You draw!");
+        $("#result").fadeIn("slow");
+      }
+    });
+
+
+  });
+
+
+
   // Enemy Rolls 
-  
-  function easyEnemyRoll(a, b) {
+
+  function rollTwoDie(a, b) {
     var die1 = getDiceRoll(a);
     var die2 = getDiceRoll(b);
-    var enemyRoll = die1 + die2;
-    return enemyRoll;
+    var roll = die1 + die2;
+    return roll;
   }
 
   // Die Rolls
