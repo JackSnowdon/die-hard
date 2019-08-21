@@ -3,9 +3,15 @@ $(document).ready(function() {
   // Global Vars
 
   var player = new Object();
+  player.maxHp = 100;
+  player.currentHp = 100;
+  player.power = 20;
 
   var enemy = new Object();
   enemy.name = "Steve";
+  enemy.maxHp = 100;
+  enemy.currentHp = 100;
+  enemy.power = 20;
 
   // Game Flow
 
@@ -40,37 +46,64 @@ $(document).ready(function() {
 
   $("#start-game").click(function() {
     $("#start-game").hide();
-    var enemyRoll = rollTwoDie(6, 8);
-    enemy.enemyRoll = enemyRoll;
-    console.log(enemyRoll);
-    $("#enemy-result").text(enemyRoll);
-    $(".enemy-roll").fadeIn("slow", function() {
-      $(".player-roll").fadeIn("slow");
-    });
+    $("#player-max").text(player.maxHp);
+    $("#player-current").text(player.currentHp);
+    $("#enemy-max").text(enemy.maxHp);
+    $("#enemy-current").text(enemy.currentHp);
+    $(".player-health").fadeIn("slow");
+    $(".enemy-health").fadeIn("slow");
+    $(".player-roll").fadeIn("slow");
   });
 
   $("#testRoll").click(function() {
-    var playerRoll = rollTwoDie(6, 8);
-    player.playerRoll = playerRoll;
-    console.log(player.playerRoll, enemy.enemyRoll);
+    var baseDmg = getDiceRoll(8);
+    var power = player.power;
+    var damage = attack(baseDmg, power);
+    console.log(damage);
     $("#testRoll").fadeOut("slow", function() {
-      $("#player-result").text(playerRoll);
-      if (enemy.enemyRoll > player.playerRoll) {
-        $("#result").text("You Loser!");
-        $("#result").fadeIn("slow").css("color", "red");
-      }
-      else if (enemy.enemyRoll == player.playerRoll) {
-        $("#result").text("You draw!");
-        $("#result").fadeIn("slow");
-      }
-      else {
-        $("#result").text("You winner!");
-        $("#result").fadeIn("slow").css("color", "green");
-      }
+      $(".player-attack").fadeIn("slow");
+      enemy.currentHp -= damage;
+      $("#player-result").text(damage)
+      $("#enemy-current").replaceWith(enemy.currentHp);
     });
-
-
   });
+
+
+
+
+
+  //
+  //    var enemyRoll = rollTwoDie(6, 8);
+  //    enemy.enemyRoll = enemyRoll;
+  //    console.log(enemyRoll);
+  //    $("#enemy-result").text(enemyRoll);
+  //    $(".enemy-roll").fadeIn("slow", function() {
+  //      $(".player-roll").fadeIn("slow");
+  //    });
+  //  });
+
+  //  $("#testRoll").click(function() {
+  //    var playerRoll = rollTwoDie(6, 8);
+  //    player.playerRoll = playerRoll;
+  //    console.log(player.playerRoll, enemy.enemyRoll);
+  //    $("#testRoll").fadeOut("slow", function() {
+  //      $("#player-result").text(playerRoll);
+  //      if (enemy.enemyRoll > player.playerRoll) {
+  //        $("#result").text("You Loser!");
+  //        $("#result").fadeIn("slow").css("color", "red");
+  //      }
+  //      else if (enemy.enemyRoll == player.playerRoll) {
+  //        $("#result").text("You draw!");
+  //        $("#result").fadeIn("slow");
+  //      }
+  //      else {
+  //        $("#result").text("You winner!");
+  //        $("#result").fadeIn("slow").css("color", "green");
+  //      }
+  //    });
+  //
+  //
+  //  });
 
 
 
@@ -143,15 +176,20 @@ $(document).ready(function() {
 
   // Helper functions 
 
+
+  function getDiceRoll(x) {
+    var diceRoll = Math.floor(Math.random() * x) + 1;
+    return diceRoll;
+  }
+
   function getDieResult(x) {
     var d = parseInt($(x).text());
     return d;
   }
 
-
-  function getDiceRoll(x) {
-    var diceRoll = Math.floor(Math.random() * x) + 1;
-    return diceRoll;
+  function attack(base, power) {
+    var result = base + power;
+    return result;
   }
 
   // Display Helpers 

@@ -12,6 +12,9 @@
 .hide-on-start,
 .enemy-roll,
 .player-roll,
+.player-health,
+.enemy-health,
+.player-attack,
 #result {
     display: none;
 }

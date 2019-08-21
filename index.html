@@ -58,7 +58,8 @@
 
                         <!--- Sucessful name entry --->
 
-                        <h3 class="hide-on-start">Hello <span class="p-name"></span>!</h3>
+                        <h3 class="hide-on-start">Welcome <span class="p-name"></span>!</h3>
+                        <h3 class="player-health">Your HP: <span id="player-current"></span>/<span id="player-max"></span></h3>
                         <hr class="break2">
                         <div class="hide-on-start">
                             <button class="btn btn-outline-success" id="start-game" type="button">Start Game</button>
@@ -70,14 +71,14 @@
             <div class="game-content text-center">
                 <div class="row">
                     <div class="col-12">
+                        <h3 class="enemy-health">Enemy HP: <span id="enemy-current"></span>/<span id="enemy-max"></span></h3>
                         <h3 class="enemy-roll">Enemy Rolled: <span id="enemy-result"></span></h3>
-                        <h3 class="player-roll">Roll a D6 and a D8!</h3>
                         <div class="row player-roll">
                             <div class="col-12 player-roll">
-                                <button type="button" id="testRoll" class="btn btn-success">Roll a D6 and a D8!</button>
+                                <button type="button" id="testRoll" class="btn btn-success">Attack!</button>
                             </div>
                         </div>
-                        <h3 class="player-roll"><span class="p-name"></span> Rolled: <span id="player-result"></span></h3>
+                        <h3 class="player-attack"><span class="p-name"></span> Hit for: <span id="player-result"></span></h3>
                     </div>
                 </div>
                 <div class="row">
