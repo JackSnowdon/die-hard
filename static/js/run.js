@@ -69,8 +69,11 @@ $(document).ready(function() {
     $(".player-attack").fadeIn("slow");
     $("#player-result").text(damage);
     $("#enemy-current").html(enemy.currentHp);
+    
+    // Checks if enemy is dead and display health as 0
 
     if (areYouDead(enemy.currentHp)) {
+      $("#enemy-current").html(0);
       $("#result").text("You Win!");
       setTimeout(function() {
           $(".game-content").fadeOut("slow", function() {
@@ -92,8 +95,11 @@ $(document).ready(function() {
       $(".enemy-attack").fadeIn("slow");
       $("#enemy-result").text(damage);
       $("#player-current").html(player.currentHp);
+      
+      // Checks if player is dead and display health as 0
 
       if (areYouDead(player.currentHp)) {
+        $("#player-current").html(0)
         $("#result").text("You Loser!");
         setTimeout(function() {
           $(".game-content").fadeOut("slow", function() {
