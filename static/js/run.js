@@ -57,66 +57,54 @@ $(document).ready(function() {
 
   $("#attack-roll").click(function() {
     $("#attack-roll").attr("disabled", true)
+
+    // Player Turn
+
     let baseDmg = getDiceRoll(8);
     let power = player.power;
     let damage = attack(baseDmg, power);
-    console.log(damage);
+
     enemy.currentHp -= damage;
+
     $(".player-attack").fadeIn("slow");
     $("#player-result").text(damage);
     $("#enemy-current").html(enemy.currentHp);
+
+    if (areYouDead(enemy.currentHp)) {
+      $("#result").text("You Win!");
+      setTimeout(function() {
+          $(".game-content").fadeOut("slow", function() {
+            $(".restart").fadeIn("slow");
+          });
+      }, 3000);
+      return;
+    }
+
     setTimeout(function() {
+
+      // Enemy Turn 
+
       let baseDmg = getDiceRoll(8);
       let power = enemy.power;
       let damage = attack(baseDmg, power);
-      console.log(damage);
+
       player.currentHp -= damage;
       $(".enemy-attack").fadeIn("slow");
       $("#enemy-result").text(damage);
       $("#player-current").html(player.currentHp);
+
+      if (areYouDead(player.currentHp)) {
+        $("#result").text("You Loser!");
+        setTimeout(function() {
+          $(".game-content").fadeOut("slow", function() {
+            $(".restart").fadeIn("slow");
+          });
+        }, 3000);
+        return;
+      }
       $("#attack-roll").attr("disabled", false);
     }, 1500);
   });
-
-
-
-
-
-
-  //
-  //    var enemyRoll = rollTwoDie(6, 8);
-  //    enemy.enemyRoll = enemyRoll;
-  //    console.log(enemyRoll);
-  //    $("#enemy-result").text(enemyRoll);
-  //    $(".enemy-roll").fadeIn("slow", function() {
-  //      $(".player-roll").fadeIn("slow");
-  //    });
-  //  });
-
-  //  $("#testRoll").click(function() {
-  //    var playerRoll = rollTwoDie(6, 8);
-  //    player.playerRoll = playerRoll;
-  //    console.log(player.playerRoll, enemy.enemyRoll);
-  //    $("#testRoll").fadeOut("slow", function() {
-  //      $("#player-result").text(playerRoll);
-  //      if (enemy.enemyRoll > player.playerRoll) {
-  //        $("#result").text("You Loser!");
-  //        $("#result").fadeIn("slow").css("color", "red");
-  //      }
-  //      else if (enemy.enemyRoll == player.playerRoll) {
-  //        $("#result").text("You draw!");
-  //        $("#result").fadeIn("slow");
-  //      }
-  //      else {
-  //        $("#result").text("You winner!");
-  //        $("#result").fadeIn("slow").css("color", "green");
-  //      }
-  //    });
-  //
-  //
-  //  });
-
-
 
   // Enemy Rolls 
 
@@ -132,9 +120,6 @@ $(document).ready(function() {
   $("#rollD4").click(function() {
     var result = getDiceRoll(4);
     $("#d4").text(result);
-    if (typeof player.name !== "undefined") {
-      alert(player.name + " Rolled: " + result);
-    }
   });
 
   $("#rollD6").click(function() {
@@ -198,6 +183,10 @@ $(document).ready(function() {
 
   function attack(base, power) {
     return base + power;
+  }
+
+  function areYouDead(hp) {
+    return hp <= 0;
   }
 
   // Display Helpers 
