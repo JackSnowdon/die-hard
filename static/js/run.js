@@ -55,18 +55,29 @@ $(document).ready(function() {
     $(".player-roll").fadeIn("slow");
   });
 
-  $("#testRoll").click(function() {
-    var baseDmg = getDiceRoll(8);
-    var power = player.power;
-    var damage = attack(baseDmg, power);
+  $("#attack-roll").click(function() {
+    $("#attack-roll").attr("disabled", true)
+    let baseDmg = getDiceRoll(8);
+    let power = player.power;
+    let damage = attack(baseDmg, power);
     console.log(damage);
-    $("#testRoll").fadeOut("slow", function() {
-      $(".player-attack").fadeIn("slow");
-      enemy.currentHp -= damage;
-      $("#player-result").text(damage)
-      $("#enemy-current").replaceWith(enemy.currentHp);
-    });
+    enemy.currentHp -= damage;
+    $(".player-attack").fadeIn("slow");
+    $("#player-result").text(damage);
+    $("#enemy-current").html(enemy.currentHp);
+    setTimeout(function() {
+      let baseDmg = getDiceRoll(8);
+      let power = enemy.power;
+      let damage = attack(baseDmg, power);
+      console.log(damage);
+      player.currentHp -= damage;
+      $(".enemy-attack").fadeIn("slow");
+      $("#enemy-result").text(damage);
+      $("#player-current").html(player.currentHp);
+      $("#attack-roll").attr("disabled", false);
+    }, 1500);
   });
+
 
 
 
@@ -178,18 +189,15 @@ $(document).ready(function() {
 
 
   function getDiceRoll(x) {
-    var diceRoll = Math.floor(Math.random() * x) + 1;
-    return diceRoll;
+    return Math.floor(Math.random() * x) + 1;
   }
 
   function getDieResult(x) {
-    var d = parseInt($(x).text());
-    return d;
+    return parseInt($(x).text());
   }
 
   function attack(base, power) {
-    var result = base + power;
-    return result;
+    return base + power;
   }
 
   // Display Helpers 
