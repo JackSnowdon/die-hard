@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Die Hard</title>
+
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="dice.html">Dice</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+            <div class="hide-on-start">Logged in as <span class="p-name font-weight-bold"></span></div>
+        </span>
+    </nav>
+
+    <div class="bg-color">
+        <div class="container">
+
+            <!--- Header --->
+
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="title">Dice Fight</h1>
+                        <hr class="break1">
+                    </div>
+                </div>
+
+            <div class="jumbotron text-center">
+                <!--- Die Rolls --->
+
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" id="rollD4" class="btn btn-success">Roll a D4!</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="rollD6" class="btn btn-success">Roll a D6!</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="rollD8" class="btn btn-success">Roll a D8!</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-4">
+                        <span class="die-value" id="d4"></span>
+                    </div>
+                    <div class="col-4">
+                        <span class="die-value" id="d6"></span>
+                    </div>
+                    <div class="col-4">
+                        <span class="die-value" id="d8"></span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-4">
+                        <button type="button" id="rollD10" class="btn btn-success">Roll a D10!</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="rollD12" class="btn btn-success">Roll a D12!</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="rollD20" class="btn btn-success">Roll a D20!</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-4">
+                        <span class="die-value" id="d10"></span>
+                    </div>
+                    <div class="col-4">
+                        <span class="die-value" id="d12"></span>
+                    </div>
+                    <div class="col-4">
+                        <span class="die-value" id="d20"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-12">
+                    <button type="button" id="totalButton" class="btn btn-success">Total</button>
+                </div>
+                <br>
+                <div class="col-12">
+                    <span class="die-value" id="total"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--- Scripts --->
+    <script src="https://kit.fontawesome.com/ccc410c56b.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/js/run.js"></script>
+</body>
+
+</html>

@@ -9,7 +9,10 @@
 }
 
 
-.hide-on-start, .enemy-roll, .player-roll, #result {
+.hide-on-start,
+.enemy-roll,
+.player-roll,
+#result {
     display: none;
 }
 
@@ -19,6 +22,28 @@
 .title {
     font-size: 9rem;
     color: #1b1c1d;
+}
+
+/* NavBar */
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 0.6rem 0.8rem;
+    transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+
+}
+
+.navbar li a:hover {
+    color: white;
+}
+
+.nav-item:hover {
+    
 }
 
 /* Breaks */

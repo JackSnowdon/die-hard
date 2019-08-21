@@ -39,9 +39,9 @@ $(document).ready(function() {
   // Start Game
 
   $("#start-game").click(function() {
-    $("#start-game").hide()
+    $("#start-game").hide();
     var enemyRoll = rollTwoDie(6, 8);
-    enemy.enemyRoll = enemyRoll
+    enemy.enemyRoll = enemyRoll;
     console.log(enemyRoll);
     $("#enemy-result").text(enemyRoll);
     $(".enemy-roll").fadeIn("slow", function() {
