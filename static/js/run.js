@@ -199,8 +199,10 @@ $(document).ready(function() {
 
   function load() {
     var saveGame = JSON.parse(localStorage.getItem("save"));
-    if (saveGame != null && saveGame != undefined) {
+    if (typeof saveGame !== "undefined") {
       player.name = saveGame.playerName;
+    } else {
+      alert("No saved game!");
     }
   }
 
