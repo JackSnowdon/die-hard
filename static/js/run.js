@@ -1,5 +1,6 @@
-$(document).ready(function() {
+window.localStorage;
 
+$(document).ready(function() {
   // Global Vars
 
   var player = new Object();
@@ -16,6 +17,17 @@ $(document).ready(function() {
   // Game Flow
 
   // Name Entry
+  
+  // Test to load user data
+
+//  if (typeof player.name !== "undefined") {
+//    console.log("test");
+//    $(".p-name").text(player.name);
+//    $("#name-entry").fadeOut("slow");
+//    $(".player-health").fadeIn("slow");
+//    $(".enemy-health").fadeIn("slow");
+//    $(".player-roll").fadeIn("slow");
+//  }
 
   $("#name-sumbit").click(function() {
 
@@ -28,7 +40,8 @@ $(document).ready(function() {
     }
     else {
       player.name = playerName;
-      console.log(player, player.name);
+      console.log(player);
+      console.log(player.name);
 
       // Hide entry form and displays players name 
 
@@ -57,8 +70,8 @@ $(document).ready(function() {
       $(".game-content").fadeIn("slow");
     }
   });
-  
-  
+
+
   $("#attack-roll").click(function() {
     $("#attack-roll").attr("disabled", true)
 
@@ -138,7 +151,61 @@ $(document).ready(function() {
 
   // Enemy Rolls 
 
+  // Helper functions 
 
+
+  function getDiceRoll(x) {
+    return Math.floor(Math.random() * x) + 1;
+  }
+
+  function getDieResult(x) {
+    return parseInt($(x).text());
+  }
+
+  function attack(base, power) {
+    return base + power;
+  }
+
+  function areYouDead(hp) {
+    return hp <= 0;
+  }
+
+  function rollTwoDie(a, b) {
+    var die1 = getDiceRoll(a);
+    var die2 = getDiceRoll(b);
+    return die1 + die2;
+  }
+
+  // Display Helpers 
+
+
+  // Save System
+
+  $("#save-button").click(function() {
+    save();
+  });
+
+  $("#load-button").click(function() {
+    load();
+  });
+
+  function save() {
+    var save = {
+      playerName: player.name
+    };
+    localStorage.setItem("save", JSON.stringify(save));
+    console.log(localStorage.getItem("save"))
+  }
+
+  function load() {
+    var saveGame = JSON.parse(localStorage.getItem("save"));
+    console.log(saveGame);
+    if (saveGame != null && saveGame != undefined) {
+      console.log(saveGame.playerName);
+      player.name = saveGame.playerName;
+      console.log(player.name);
+    }
+  }
 
   // Die Rolls
 
@@ -194,33 +261,6 @@ $(document).ready(function() {
     }
     else return;
   });
-
-  // Helper functions 
-
-
-  function getDiceRoll(x) {
-    return Math.floor(Math.random() * x) + 1;
-  }
-
-  function getDieResult(x) {
-    return parseInt($(x).text());
-  }
-
-  function attack(base, power) {
-    return base + power;
-  }
-
-  function areYouDead(hp) {
-    return hp <= 0;
-  }
-
-  function rollTwoDie(a, b) {
-    var die1 = getDiceRoll(a);
-    var die2 = getDiceRoll(b);
-    return die1 + die2;
-  }
-
-  // Display Helpers 
 
 
 
