@@ -57,15 +57,8 @@ $(document).ready(function() {
       $(".game-content").fadeIn("slow");
     }
   });
-
-  //    if ($(".game-content").attr("hidden", true)) {
-  //      $(".game-content").fadeIn("slow");
-  //      $("#player-result").html("");
-  //      $("#enemy-result").html("");
-  //      $("#result").text("");
-  //    } else 
-
-
+  
+  
   $("#attack-roll").click(function() {
     $("#attack-roll").attr("disabled", true)
 
