@@ -7,6 +7,7 @@ $(document).ready(function() {
   player.maxHp = 100;
   player.currentHp = 100;
   player.power = 20;
+  player.kills = 0;
 
   var enemy = new Object();
   enemy.name = "Steve";
@@ -34,8 +35,10 @@ $(document).ready(function() {
 
       if (typeof player.name !== "undefined") {
         $(".p-name").text(player.name);
+        $(".kill-meter").text(player.kills);
         $("#name-entry").fadeOut("slow", function() {
           $(".hide-on-start").fadeIn("slow");
+          $(".nav-login").fadeIn("slow");
         });
       }
     }
@@ -78,6 +81,8 @@ $(document).ready(function() {
     // Checks if enemy is dead and display health as 0
 
     if (areYouDead(enemy.currentHp)) {
+      player.kills++;
+      $(".kill-meter").html(player.kills);
       $("#enemy-current").html(0);
       $("#result").text("You Win!");
       setTimeout(function() {
@@ -180,30 +185,35 @@ $(document).ready(function() {
     var loadCheck = confirm("Load your save file? (This will overwrite your current save)");
     if (loadCheck == true) {
       load();
-      $(".nav-login").show();
+      console.log(player.kills);
+      $(".nav-login").fadeIn("slow");
+      console.log(player.kills);
+      $(".kill-meter").text(player.kills);
       $(".p-name").text(player.name);
       $("#name-entry").fadeOut("slow", function() {
         $(".hide-on-start").fadeIn("slow");
       });
-    } else {
+    }
+    else {
       alert("Game not loaded");
     }
   });
 
   function save() {
     var save = {
-      playerName: player.name
+      playerName: player.name,
+      playerKills: player.kills
     };
     localStorage.setItem("save", JSON.stringify(save));
   }
 
   function load() {
     var saveGame = JSON.parse(localStorage.getItem("save"));
-    if (typeof saveGame !== "undefined") {
+    if (saveGame != null && saveGame != undefined) {
       player.name = saveGame.playerName;
-    } else {
-      alert("No saved game!");
-    }
+      player.kills = saveGame.playerKills;
+      console.log(player.kills);
+    } console.log(player.kills);
   }
 
   // Die Rolls
