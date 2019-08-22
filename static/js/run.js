@@ -17,17 +17,17 @@ $(document).ready(function() {
   // Game Flow
 
   // Name Entry
-  
+
   // Test to load user data
 
-//  if (typeof player.name !== "undefined") {
-//    console.log("test");
-//    $(".p-name").text(player.name);
-//    $("#name-entry").fadeOut("slow");
-//    $(".player-health").fadeIn("slow");
-//    $(".enemy-health").fadeIn("slow");
-//    $(".player-roll").fadeIn("slow");
-//  }
+  //  if (typeof player.name !== "undefined") {
+  //    console.log("test");
+  //    $(".p-name").text(player.name);
+  //    $("#name-entry").fadeOut("slow");
+  //    $(".player-health").fadeIn("slow");
+  //    $(".enemy-health").fadeIn("slow");
+  //    $(".player-roll").fadeIn("slow");
+  //  }
 
   $("#name-sumbit").click(function() {
 
@@ -182,11 +182,18 @@ $(document).ready(function() {
   // Save System
 
   $("#save-button").click(function() {
-    save();
+    var saveCheck = confirm("Saving will overwrite " + player.name + "'s save, press OK to confirm");
+    if (saveCheck == true) {
+      save();
+    } else {
+      alert("Game not saved");
+    }
   });
 
   $("#load-button").click(function() {
     load();
+    $(".nav-login").show();
+    $(".p-name").text(player.name);
   });
 
   function save() {
@@ -199,9 +206,7 @@ $(document).ready(function() {
 
   function load() {
     var saveGame = JSON.parse(localStorage.getItem("save"));
-    console.log(saveGame);
     if (saveGame != null && saveGame != undefined) {
-      console.log(saveGame.playerName);
       player.name = saveGame.playerName;
       console.log(player.name);
     }

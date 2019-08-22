@@ -16,6 +16,7 @@
 .enemy-health,
 .player-attack,
 .enemy-attack,
+.nav-login,
 .restart{
     display: none;
 }
