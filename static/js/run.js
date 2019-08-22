@@ -53,7 +53,18 @@ $(document).ready(function() {
     $(".player-health").fadeIn("slow");
     $(".enemy-health").fadeIn("slow");
     $(".player-roll").fadeIn("slow");
+    if ($(".game-content").attr("hidden", false)) {
+      $(".game-content").fadeIn("slow");
+    }
   });
+
+  //    if ($(".game-content").attr("hidden", true)) {
+  //      $(".game-content").fadeIn("slow");
+  //      $("#player-result").html("");
+  //      $("#enemy-result").html("");
+  //      $("#result").text("");
+  //    } else 
+
 
   $("#attack-roll").click(function() {
     $("#attack-roll").attr("disabled", true)
@@ -64,21 +75,23 @@ $(document).ready(function() {
     let power = player.power;
     let damage = attack(baseDmg, power);
 
+    console.log(damage);
+
     enemy.currentHp -= damage;
 
     $(".player-attack").fadeIn("slow");
-    $("#player-result").text(damage);
+    $("#player-result").fadeIn("slow").text(damage);
     $("#enemy-current").html(enemy.currentHp);
-    
+
     // Checks if enemy is dead and display health as 0
 
     if (areYouDead(enemy.currentHp)) {
       $("#enemy-current").html(0);
       $("#result").text("You Win!");
       setTimeout(function() {
-          $(".game-content").fadeOut("slow", function() {
-            $(".restart").fadeIn("slow");
-          });
+        $(".game-content").fadeOut("slow", function() {
+          $(".restart").fadeIn("slow");
+        });
       }, 3000);
       return;
     }
@@ -91,11 +104,13 @@ $(document).ready(function() {
       let power = enemy.power;
       let damage = attack(baseDmg, power);
 
+      console.log(damage);
+
       player.currentHp -= damage;
       $(".enemy-attack").fadeIn("slow");
-      $("#enemy-result").text(damage);
+      $("#enemy-result").fadeIn("slow").text(damage);
       $("#player-current").html(player.currentHp);
-      
+
       // Checks if player is dead and display health as 0
 
       if (areYouDead(player.currentHp)) {
@@ -112,14 +127,25 @@ $(document).ready(function() {
     }, 1500);
   });
 
+  // Restart 
+
+  $("#restart").click(function() {
+    enemy.currentHp = 100;
+    player.currentHp = 100;
+    $("#player-result").fadeOut().html("");
+    $("#enemy-result").fadeOut().html("");
+    $(".enemy-attack").fadeOut();
+    $(".player-attack").fadeOut();
+    $(".restart").fadeToggle("slow", function() {
+      $("#start-game").fadeIn("slow");
+      $("#result").html("");
+      $("#attack-roll").attr("disabled", false);
+    });
+  });
+
   // Enemy Rolls 
 
-  function rollTwoDie(a, b) {
-    var die1 = getDiceRoll(a);
-    var die2 = getDiceRoll(b);
-    var roll = die1 + die2;
-    return roll;
-  }
+
 
   // Die Rolls
 
@@ -193,6 +219,12 @@ $(document).ready(function() {
 
   function areYouDead(hp) {
     return hp <= 0;
+  }
+
+  function rollTwoDie(a, b) {
+    var die1 = getDiceRoll(a);
+    var die2 = getDiceRoll(b);
+    return die1 + die2;
   }
 
   // Display Helpers 
