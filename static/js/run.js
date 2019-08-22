@@ -18,17 +18,6 @@ $(document).ready(function() {
 
   // Name Entry
 
-  // Test to load user data
-
-  //  if (typeof player.name !== "undefined") {
-  //    console.log("test");
-  //    $(".p-name").text(player.name);
-  //    $("#name-entry").fadeOut("slow");
-  //    $(".player-health").fadeIn("slow");
-  //    $(".enemy-health").fadeIn("slow");
-  //    $(".player-roll").fadeIn("slow");
-  //  }
-
   $("#name-sumbit").click(function() {
 
     // Checks name has value (Trimmed in case of whitespace)
@@ -40,8 +29,6 @@ $(document).ready(function() {
     }
     else {
       player.name = playerName;
-      console.log(player);
-      console.log(player.name);
 
       // Hide entry form and displays players name 
 
@@ -78,8 +65,7 @@ $(document).ready(function() {
     // Player Turn
 
     let baseDmg = getDiceRoll(8);
-    let power = player.power;
-    let damage = attack(baseDmg, power);
+    let damage = attack(baseDmg, player.power);
 
     console.log(damage);
 
@@ -107,8 +93,7 @@ $(document).ready(function() {
       // Enemy Turn 
 
       let baseDmg = getDiceRoll(8);
-      let power = enemy.power;
-      let damage = attack(baseDmg, power);
+      let damage = attack(baseDmg, enemy.power);
 
       console.log(damage);
 
@@ -185,15 +170,24 @@ $(document).ready(function() {
     var saveCheck = confirm("Saving will overwrite " + player.name + "'s save, press OK to confirm");
     if (saveCheck == true) {
       save();
-    } else {
+    }
+    else {
       alert("Game not saved");
     }
   });
 
   $("#load-button").click(function() {
-    load();
-    $(".nav-login").show();
-    $(".p-name").text(player.name);
+    var loadCheck = confirm("Load your save file? (This will overwrite your current save)");
+    if (loadCheck == true) {
+      load();
+      $(".nav-login").show();
+      $(".p-name").text(player.name);
+      $("#name-entry").fadeOut("slow", function() {
+        $(".hide-on-start").fadeIn("slow");
+      });
+    } else {
+      alert("Game not loaded");
+    }
   });
 
   function save() {
@@ -201,14 +195,12 @@ $(document).ready(function() {
       playerName: player.name
     };
     localStorage.setItem("save", JSON.stringify(save));
-    console.log(localStorage.getItem("save"))
   }
 
   function load() {
     var saveGame = JSON.parse(localStorage.getItem("save"));
     if (saveGame != null && saveGame != undefined) {
       player.name = saveGame.playerName;
-      console.log(player.name);
     }
   }
 
@@ -266,7 +258,5 @@ $(document).ready(function() {
     }
     else return;
   });
-
-
 
 });
