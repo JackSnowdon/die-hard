@@ -50,6 +50,7 @@ $(document).ready(function() {
     if (player.kills > 0) {
       enemy.currentHp = setEnemyHealth(player.kills);
       enemy.maxHp = enemy.currentHp;
+      enemy.power = setEnemyPower(player.kills);
     }
     $("#start-game").hide();
     $("#player-max").text(player.maxHp);
@@ -72,6 +73,7 @@ $(document).ready(function() {
 
     let baseDmg = getDiceRoll(8);
     let power = attack(player.power, player.kills);
+    console.log(power);
     let damage = attack(baseDmg, power);
 
     console.log(damage);
@@ -130,8 +132,6 @@ $(document).ready(function() {
   // Restart 
 
   $("#restart").click(function() {
-    enemy.currentHp = setEnemyHealth(player.kills);
-    console.log(enemy.currentHp);
     player.currentHp = 100;
     $("#player-result").fadeOut().html("");
     $("#enemy-result").fadeOut().html("");
@@ -167,9 +167,15 @@ $(document).ready(function() {
 
   function setEnemyHealth(kills) {
     var base = 100;
-    var modifer = getDiceRoll(kills) * getDiceRoll(kills);
-    console.log(modifer);
-    return base + modifer;
+    var mod = rollTwoDie(kills, 10) * 2;
+    return base + mod;
+  }
+  
+  function setEnemyPower(kills) {
+    var base = 10;
+    var mod = getDiceRoll(kills);
+    console.log(mod);
+    return base + mod;
   }
 
   function rollTwoDie(a, b) {
