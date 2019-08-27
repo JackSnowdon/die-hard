@@ -6,14 +6,14 @@ $(document).ready(function() {
   var player = new Object();
   player.maxHp = 100;
   player.currentHp = 100;
-  player.power = 20;
+  player.power = 10;
   player.kills = 0;
 
   var enemy = new Object();
   enemy.name = "Steve";
-  enemy.maxHp = 100;
   enemy.currentHp = 100;
-  enemy.power = 20;
+  enemy.maxHp = 100;
+  enemy.power = 10;
 
   // Game Flow
 
@@ -42,12 +42,15 @@ $(document).ready(function() {
         });
       }
     }
-
   });
 
   // Start Game
 
   $("#start-game").click(function() {
+    if (player.kills > 0) {
+      enemy.currentHp = setEnemyHealth(player.kills);
+      enemy.maxHp = enemy.currentHp;
+    }
     $("#start-game").hide();
     $("#player-max").text(player.maxHp);
     $("#player-current").text(player.currentHp);
@@ -68,7 +71,8 @@ $(document).ready(function() {
     // Player Turn
 
     let baseDmg = getDiceRoll(8);
-    let damage = attack(baseDmg, player.power);
+    let power = attack(player.power, player.kills);
+    let damage = attack(baseDmg, power);
 
     console.log(damage);
 
@@ -126,7 +130,8 @@ $(document).ready(function() {
   // Restart 
 
   $("#restart").click(function() {
-    enemy.currentHp = 100;
+    enemy.currentHp = setEnemyHealth(player.kills);
+    console.log(enemy.currentHp);
     player.currentHp = 100;
     $("#player-result").fadeOut().html("");
     $("#enemy-result").fadeOut().html("");
@@ -160,6 +165,13 @@ $(document).ready(function() {
     return hp <= 0;
   }
 
+  function setEnemyHealth(kills) {
+    var base = 100;
+    var modifer = getDiceRoll(kills) * getDiceRoll(kills);
+    console.log(modifer);
+    return base + modifer;
+  }
+
   function rollTwoDie(a, b) {
     var die1 = getDiceRoll(a);
     var die2 = getDiceRoll(b);
@@ -185,9 +197,7 @@ $(document).ready(function() {
     var loadCheck = confirm("Load your save file? (This will overwrite your current save)");
     if (loadCheck == true) {
       load();
-      console.log(player.kills);
       $(".nav-login").fadeIn("slow");
-      console.log(player.kills);
       $(".kill-meter").text(player.kills);
       $(".p-name").text(player.name);
       $("#name-entry").fadeOut("slow", function() {
@@ -212,8 +222,7 @@ $(document).ready(function() {
     if (saveGame != null && saveGame != undefined) {
       player.name = saveGame.playerName;
       player.kills = saveGame.playerKills;
-      console.log(player.kills);
-    } console.log(player.kills);
+    }
   }
 
   // Die Rolls
@@ -268,7 +277,8 @@ $(document).ready(function() {
     if (typeof player.name !== "undefined") {
       alert(player.name + " Rolled: " + total);
     }
-    else return;
+    else {
+      alert("You Rolled: " + total);
+    }
   });
-
 });
