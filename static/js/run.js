@@ -73,10 +73,15 @@ $(document).ready(function() {
 
     let baseDmg = getDiceRoll(8);
     let power = attack(player.power, player.kills);
-    console.log(power);
-    let damage = attack(baseDmg, power);
+    let damage = 0;
 
-    console.log(damage);
+    if (getDiceRoll(100) > 75) {
+      $("#crit").show().text("Crit!").css("color", "red");
+      damage = attack(baseDmg, power) * 5;
+    }
+    else {
+      damage = attack(baseDmg, power);
+    }
 
     enemy.currentHp -= damage;
 
@@ -90,8 +95,9 @@ $(document).ready(function() {
       player.kills++;
       $(".kill-meter").html(player.kills);
       $("#enemy-current").html(0);
-      $("#result").text("You Win!");
+      $("#result").html("You Win!");
       setTimeout(function() {
+        $("#crit").fadeOut("slow").html("");
         $(".game-content").fadeOut("slow", function() {
           $(".restart").fadeIn("slow");
         });
@@ -100,6 +106,7 @@ $(document).ready(function() {
     }
 
     setTimeout(function() {
+      $("#crit").fadeOut("slow").html("");
 
       // Enemy Turn 
 
@@ -117,7 +124,7 @@ $(document).ready(function() {
 
       if (areYouDead(player.currentHp)) {
         $("#player-current").html(0)
-        $("#result").text("You Loser!");
+        $("#result").html("You Loser!");
         setTimeout(function() {
           $(".game-content").fadeOut("slow", function() {
             $(".restart").fadeIn("slow");
@@ -167,10 +174,11 @@ $(document).ready(function() {
 
   function setEnemyHealth(kills) {
     var base = 100;
-    var mod = rollTwoDie(kills, 10) * 2;
+    var mod = rollTwoDie(kills, 10) * 3;
+    console.log(mod);
     return base + mod;
   }
-  
+
   function setEnemyPower(kills) {
     var base = 10;
     var mod = getDiceRoll(kills);
