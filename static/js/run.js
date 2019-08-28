@@ -8,6 +8,7 @@ $(document).ready(function() {
   player.currentHp = 100;
   player.power = 10;
   player.kills = 0;
+  player.gold = 0;
 
   var enemy = new Object();
   enemy.name = "Steve";
@@ -36,6 +37,7 @@ $(document).ready(function() {
       if (typeof player.name !== "undefined") {
         $(".p-name").text(player.name);
         $(".kill-meter").text(player.kills);
+        $(".gold-meter").text(player.gold);
         $("#name-entry").fadeOut("slow", function() {
           $(".hide-on-start").fadeIn("slow");
           $(".nav-login").fadeIn("slow");
@@ -75,7 +77,7 @@ $(document).ready(function() {
     let power = attack(player.power, player.kills);
     let damage = 0;
 
-    if (getDiceRoll(100) > 75) {
+    if (getDiceRoll(100) > 90) {
       $("#crit").show().text("Crit!").css("color", "red");
       damage = attack(baseDmg, power) * 5;
     }
@@ -93,9 +95,12 @@ $(document).ready(function() {
 
     if (areYouDead(enemy.currentHp)) {
       player.kills++;
+      let goldDrop = getDiceRoll(player.currentHp * 2);
+      earnGold(goldDrop);
       $(".kill-meter").html(player.kills);
+      $(".gold-meter").html(player.gold);
       $("#enemy-current").html(0);
-      $("#result").html("You Win!");
+      $("#result").html("Victory! The Enemy dropped " + goldDrop + " Gold coins!");
       setTimeout(function() {
         $("#crit").fadeOut("slow").html("");
         $(".game-content").fadeOut("slow", function() {
@@ -111,9 +116,9 @@ $(document).ready(function() {
       // Enemy Turn 
 
       let baseDmg = getDiceRoll(8);
+      console.log(baseDmg);
       let damage = attack(baseDmg, enemy.power);
 
-      console.log(damage);
 
       player.currentHp -= damage;
       $(".enemy-attack").fadeIn("slow");
@@ -124,7 +129,10 @@ $(document).ready(function() {
 
       if (areYouDead(player.currentHp)) {
         $("#player-current").html(0)
-        $("#result").html("You Loser!");
+        let goldDrop = getDieRoll(enemy.currentHp);
+        earnGold(goldDrop);
+        $(".gold-meter").html(player.gold);
+        $("#result").html("You Loser! Picking yourself back up, you find " + goldDrop + "Worth of loose Gold coins!");
         setTimeout(function() {
           $(".game-content").fadeOut("slow", function() {
             $(".restart").fadeIn("slow");
@@ -155,7 +163,6 @@ $(document).ready(function() {
 
   // Helper functions 
 
-
   function getDiceRoll(x) {
     return Math.floor(Math.random() * x) + 1;
   }
@@ -175,14 +182,12 @@ $(document).ready(function() {
   function setEnemyHealth(kills) {
     var base = 100;
     var mod = rollTwoDie(kills, 10) * 3;
-    console.log(mod);
     return base + mod;
   }
 
   function setEnemyPower(kills) {
     var base = 10;
     var mod = getDiceRoll(kills);
-    console.log(mod);
     return base + mod;
   }
 
@@ -190,6 +195,10 @@ $(document).ready(function() {
     var die1 = getDiceRoll(a);
     var die2 = getDiceRoll(b);
     return die1 + die2;
+  }
+  
+  function earnGold(hp) {
+    return player.gold += hp;
   }
 
   // Display Helpers 
@@ -213,6 +222,7 @@ $(document).ready(function() {
       load();
       $(".nav-login").fadeIn("slow");
       $(".kill-meter").text(player.kills);
+      $(".gold-meter").text(player.gold);
       $(".p-name").text(player.name);
       $("#name-entry").fadeOut("slow", function() {
         $(".hide-on-start").fadeIn("slow");
@@ -226,7 +236,8 @@ $(document).ready(function() {
   function save() {
     var save = {
       playerName: player.name,
-      playerKills: player.kills
+      playerKills: player.kills,
+      playerGold: player.gold
     };
     localStorage.setItem("save", JSON.stringify(save));
   }
@@ -236,6 +247,7 @@ $(document).ready(function() {
     if (saveGame != null && saveGame != undefined) {
       player.name = saveGame.playerName;
       player.kills = saveGame.playerKills;
+      player.gold = saveGame.playerGold;
     }
   }
 
