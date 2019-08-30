@@ -87,6 +87,7 @@ $(document).ready(function() {
 
     if ($(".game-content").attr("hidden", false)) {
       $(".game-content").fadeIn("slow");
+      $("#attack-helper").show();
     }
   });
 
@@ -94,6 +95,7 @@ $(document).ready(function() {
 
   $("#attack-roll").click(function() {
     $("#attack-roll").attr("disabled", true);
+    $("#attack-helper").fadeOut("slow")
 
     // Player Attack 
 

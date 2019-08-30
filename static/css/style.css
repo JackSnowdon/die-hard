@@ -70,7 +70,6 @@
 
 /* Buttons */
 
-
 #start-game,
 #shop {
     padding: .5rem 3rem;
@@ -81,6 +80,26 @@
     -moz-transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
+}
+
+.img-button {
+    height: 150px;
+    width: 150px;
+}
+
+#load-button {
+    background: url(../imgs/load.png);
+    background-size: contain;
+}
+
+#attack-roll {
+    background: url(../imgs/dag.png);
+    background-size: contain;
+}
+
+#save-button {
+    background: url(../imgs/save.png);
+    background-size: contain;
 }
 
 /* Die Rolls */

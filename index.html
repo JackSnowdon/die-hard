@@ -51,9 +51,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div id="name-entry">
-                            <h2>Welcome to Dice Fight! The battlescript you've been waiting for!</h2>
-                            <h4>Every kill you get, the enemy overlord will a stronger fighter, how long can you last?!<br> If its your first time here, enter your name below to start your first battle!
-                            </h4>
+                            <h2>Welcome to Dice Fight, The battlescript you've been waiting for!</h2>
+                            <h3>Every kill you get, the overlord sends a stronger fighter, how many of their minions can you defeat?<br> If its your first time here, enter your name below to start your first battle!</h3>
+                            <br>
                             <div class="name-form">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" id="player-name" placeholder="Name">
@@ -62,8 +62,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <h4>Returning users, hit the load button below to restore your progress!</h4>
-                            <button class="btn btn-success btn-lg" id="load-button" type="button">Load</button>
+                            <br>
+                            <h3>Returning users, hit the load button below to restore your progress!</h3>
+                            <button class="img-button" id="load-button" type="button"></button>
                         </div>
 
                         <!--- Sucessful name entry --->
@@ -110,12 +111,13 @@
                         <h3 class="enemy-health">Enemy HP: <span id="enemy-current"></span>/<span id="enemy-max"></span></h3>
                         <div class="row player-roll">
                             <div class="col-12 player-roll">
-                                <button type="button" id="attack-roll" class="btn btn-success">Attack!</button>
+                                <h3 id="attack-helper">Attack using the button below!</h3>
+                                <button class="img-button" type="button" id="attack-roll"></button>
                             </div>
                         </div>
                         <h2 id="crit"></h2>
-                        <h3 class="player-attack"><span class="p-name"></span> hit for: <span id="player-result"></span></h3>
-                        <h3 class="enemy-attack">Enemy hit for: <span id="enemy-result"></span></h3>
+                        <h3 class="player-attack"><span class="p-name"></span> hits the Enemy for: <span id="player-result"></span></h3>
+                        <h3 class="enemy-attack">Enemy hits you for: <span id="enemy-result"></span></h3>
                         <h3 id="result"></h3>
                     </div>
                 </div>
@@ -129,7 +131,7 @@
                     </div>
                     <div class="col-12">
                         <h3>Don't forget to save your progress!</h3>
-                        <button class="btn btn-success" id="save-button" type="button">Save</button>
+                        <button class="img-button" id="save-button" type="button"></button>
                     </div>
                 </div>
             </div>
