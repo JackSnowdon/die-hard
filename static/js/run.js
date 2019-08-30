@@ -9,6 +9,8 @@ $(document).ready(function() {
   player.power = 10;
   player.kills = 0;
   player.gold = 0;
+  player.upgradeHP = 1;
+  player.upgradePower = 1;
 
   var enemy = new Object();
   enemy.name = "Steve";
@@ -149,7 +151,7 @@ $(document).ready(function() {
   // Restart 
 
   $("#restart").click(function() {
-    player.currentHp = 100;
+    player.currentHp = player.maxHp;
     $("#player-result").fadeOut().html("");
     $("#enemy-result").fadeOut().html("");
     $(".enemy-attack").fadeOut();
@@ -169,10 +171,42 @@ $(document).ready(function() {
     $(".shop-div").fadeOut("slow");
     $(".player-max").text(player.maxHp);
     $(".player-power").text(player.power);
+    var hpCost = upgradeAmount(player.upgradeHP);
+    $(".hp-cost").text(hpCost);
+    var powerCost = upgradeAmount(player.upgradePower);
+    $(".power-cost").text(powerCost);
     setTimeout(function() {
       $(".shop-content").fadeIn("slow");
     }, 1000);
   });
+
+  $("#buy-hp").click(function() {
+    buyUpgrade(".hp-cost", player.maxHp);
+  });
+
+  $("#buy-power").click(function() {
+    buyUpgrade(".power-cost", player.power);
+  });
+
+  function buyUpgrade(x, y) {
+    var cost = $(x).text();
+    if (player.gold >= cost) {
+      var purchaseCheck = confirm("Buy upgrade for " + cost + " Gold?");
+      if (purchaseCheck == true) {
+        player.gold -= cost;
+        
+      } else {
+        alert("Upgrade not purchased");
+      }
+    }
+    else {
+      alert("You don't have enough Gold!");
+    }
+  }
+
+  function upgradeAmount(x) {
+    return x * 250;
+  }
 
   // Helper functions 
 
