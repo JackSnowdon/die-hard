@@ -102,6 +102,16 @@
     background-size: contain;
 }
 
+#buy-hp {
+    background: url(../imgs/hp-up.png);
+    background-size: contain;
+}
+
+#buy-power {
+    background: url(../imgs/power-up.png);
+    background-size: contain;
+}
+
 /* Die Rolls */
 
 .die-value {
