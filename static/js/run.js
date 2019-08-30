@@ -41,6 +41,7 @@ $(document).ready(function() {
         $("#name-entry").fadeOut("slow", function() {
           $(".hide-on-start").fadeIn("slow");
           $(".nav-login").fadeIn("slow");
+          $(".shop-div").fadeIn("slow");
         });
       }
     }
@@ -54,8 +55,9 @@ $(document).ready(function() {
       enemy.maxHp = enemy.currentHp;
       enemy.power = setEnemyPower(player.kills);
     }
+    $(".shop-div").hide();
     $("#start-game").hide();
-    $("#player-max").text(player.maxHp);
+    $(".player-max").text(player.maxHp);
     $("#player-current").text(player.currentHp);
     $("#enemy-max").text(enemy.maxHp);
     $("#enemy-current").text(enemy.currentHp);
@@ -129,10 +131,10 @@ $(document).ready(function() {
 
       if (areYouDead(player.currentHp)) {
         $("#player-current").html(0)
-        let goldDrop = getDieRoll(enemy.currentHp);
+        let goldDrop = getDiceRoll(enemy.currentHp);
         earnGold(goldDrop);
         $(".gold-meter").html(player.gold);
-        $("#result").html("You Loser! Picking yourself back up, you find " + goldDrop + "Worth of loose Gold coins!");
+        $("#result").html("You Loser! Picking yourself back up, you find " + goldDrop + " loose Gold coins!");
         setTimeout(function() {
           $(".game-content").fadeOut("slow", function() {
             $(".restart").fadeIn("slow");
@@ -154,12 +156,23 @@ $(document).ready(function() {
     $(".player-attack").fadeOut();
     $(".restart").fadeToggle("slow", function() {
       $("#start-game").fadeIn("slow");
+      $(".shop-div").fadeIn("slow");
       $("#result").html("");
       $("#attack-roll").attr("disabled", false);
     });
   });
 
-  // Enemy Rolls 
+  // Shop
+
+  $("#shop").click(function() {
+    $("#start-game").hide();
+    $(".shop-div").fadeOut("slow");
+    $(".player-max").text(player.maxHp);
+    $(".player-power").text(player.power);
+    setTimeout(function() {
+      $(".shop-content").fadeIn("slow");
+    }, 1000);
+  });
 
   // Helper functions 
 
@@ -196,7 +209,7 @@ $(document).ready(function() {
     var die2 = getDiceRoll(b);
     return die1 + die2;
   }
-  
+
   function earnGold(hp) {
     return player.gold += hp;
   }
@@ -226,6 +239,7 @@ $(document).ready(function() {
       $(".p-name").text(player.name);
       $("#name-entry").fadeOut("slow", function() {
         $(".hide-on-start").fadeIn("slow");
+        $(".shop-div").fadeIn("slow");
       });
     }
     else {

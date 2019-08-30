@@ -18,7 +18,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none d-lg-block">
                 <a class="nav-link" href="dice.html">Dice</a>
             </li>
         </ul>
@@ -69,11 +69,32 @@
                         <!--- Sucessful name entry --->
 
                         <h3 class="hide-on-start">Welcome <span class="p-name"></span>!</h3>
-                        <h3 class="player-health">Your HP: <span id="player-current"></span>/<span id="player-max"></span></h3>
+                        <h3 class="player-health">Your HP: <span id="player-current"></span>/<span class="player-max"></span></h3>
                         <hr class="break2">
                         <div class="hide-on-start">
                             <button class="btn btn-outline-success" id="start-game" type="button">Start Game</button>
                         </div>
+                        <div class="shop-div">
+                            <br>
+                            <button class="btn btn-outline-success" id="shop" type="button">Shop</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shop-content text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Welcome to the Shop!</h2>
+                        <h3>Spend your gold below to increase your health and attack power!</h3>
+                    </div>
+                    <div class="col-6">
+                        <h3>Current Max HP = <span class="player-max"></span></h3>
+                        <button type="button" id="buy-hp" class="btn btn-success">Increase Max HP</button>
+                    </div>
+                    <div class="col-6">
+                        <h3>Current Power = <span class="player-power"></span></h3>
+                        <button type="button" id="buy-power" class="btn btn-success">Increase Power</button>
                     </div>
                 </div>
             </div>
