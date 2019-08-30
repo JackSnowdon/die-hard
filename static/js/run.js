@@ -1,11 +1,11 @@
-window.localStorage;
+//  Below creates localStorage for Saving/Loading
 
-//var $ = function() {
-//  return 1 + 1;
-//};
+window.localStorage;
 
 $(document).ready(function() {
   // Global Vars
+
+  // Player Object
 
   var player = new Object();
   player.maxHp = 100;
@@ -15,6 +15,8 @@ $(document).ready(function() {
   player.gold = 250;
   player.upgradeHp = 1;
   player.upgradePower = 1;
+
+  // Enemy Object
 
   var enemy = new Object();
   enemy.name = "Steve";
@@ -38,13 +40,16 @@ $(document).ready(function() {
     else {
       player.name = playerName;
 
-      // Hide entry form and displays players name 
+      // Hides name entry form and displays key player infomation 
 
       if (typeof player.name !== "undefined") {
         $(".p-name").text(player.name);
         $(".kill-meter").text(player.kills);
         $(".gold-meter").text(player.gold);
         $("#name-entry").fadeOut("slow", function() {
+
+          // Displays Start Game and Shop Buttons
+
           $(".hide-on-start").fadeIn("slow");
           $(".nav-login").fadeIn("slow");
           $(".shop-div").fadeIn("slow");
@@ -53,14 +58,21 @@ $(document).ready(function() {
     }
   });
 
-  // Start Game
+
 
   $("#start-game").click(function() {
+
+    // Sets enemy stats using player.kills as a modifer to increase difficulty
+
     if (player.kills > 0) {
       enemy.currentHp = setEnemyHealth(player.kills);
       enemy.maxHp = enemy.currentHp;
       enemy.power = setEnemyPower(player.kills);
     }
+
+    // Hides starting buttons and renders game content
+
+
     $(".shop-div").hide();
     $("#start-game").hide();
     $(".player-max").text(player.maxHp);
@@ -70,20 +82,26 @@ $(document).ready(function() {
     $(".player-health").fadeIn("slow");
     $(".enemy-health").fadeIn("slow");
     $(".player-roll").fadeIn("slow");
+
+    // On restart below loop makes sure correct content is displaying
+
     if ($(".game-content").attr("hidden", false)) {
       $(".game-content").fadeIn("slow");
     }
   });
 
+  // Player Turn
 
   $("#attack-roll").click(function() {
     $("#attack-roll").attr("disabled", true);
 
-    // Player Turn
+    // Player Attack 
 
     let baseDmg = getDiceRoll(8);
     let power = attack(player.power, player.kills);
     let damage = 0;
+
+    // Rolls for a crictal chance 
 
     if (getDiceRoll(100) > 90) {
       $("#crit").show().text("Crit!").css("color", "red");
@@ -93,22 +111,38 @@ $(document).ready(function() {
       damage = attack(baseDmg, power);
     }
 
+    // Reduces enemy health and displays results
+
     enemy.currentHp -= damage;
 
     $(".player-attack").fadeIn("slow");
     $("#player-result").fadeIn("slow").text(damage);
     $("#enemy-current").html(enemy.currentHp);
 
-    // Checks if enemy is dead and display health as 0
+    // Checks if enemy is dead for player victory content
+
 
     if (areYouDead(enemy.currentHp)) {
       player.kills++;
+
+      // Creates "random" gold amount using remain HP
+
       let goldDrop = getDiceRoll(player.currentHp * 2);
       earnGold(goldDrop);
+
+      // Update and display player stats
+
       $(".kill-meter").html(player.kills);
       $(".gold-meter").html(player.gold);
+
+      // Sets enemy HP to 0 and victory message
+
+
       $("#enemy-current").html(0);
       $("#result").html("Victory! The Enemy dropped " + goldDrop + " Gold coins!");
+
+      // Hides game content and displays restart
+
       setTimeout(function() {
         $("#crit").fadeOut("slow").html("");
         $(".game-content").fadeOut("slow", function() {
@@ -118,29 +152,37 @@ $(document).ready(function() {
       return;
     }
 
+    // Enemy Turn 
+
     setTimeout(function() {
       $("#crit").fadeOut("slow").html("");
 
-      // Enemy Turn 
+      // Enemy Attack 
 
       let baseDmg = getDiceRoll(8);
-      console.log(baseDmg);
       let damage = attack(baseDmg, enemy.power);
 
+      // Reduces player health and displays results
 
       player.currentHp -= damage;
       $(".enemy-attack").fadeIn("slow");
       $("#enemy-result").fadeIn("slow").text(damage);
       $("#player-current").html(player.currentHp);
 
-      // Checks if player is dead and display health as 0
+      // Checks if player is dead 
 
       if (areYouDead(player.currentHp)) {
         $("#player-current").html(0);
+
+        // Reduced gold drop for losing
+
         let goldDrop = getDiceRoll(enemy.currentHp);
         earnGold(goldDrop);
         $(".gold-meter").html(player.gold);
         $("#result").html("You Loser! Picking yourself back up, you find " + goldDrop + " loose Gold coins!");
+
+        // Hides game content and displays restart
+
         setTimeout(function() {
           $(".game-content").fadeOut("slow", function() {
             $(".restart").fadeIn("slow");
@@ -155,11 +197,17 @@ $(document).ready(function() {
   // Restart 
 
   $("#restart").click(function() {
+
+    // Sets playerHP back to full and hides rest of game content 
+
     player.currentHp = player.maxHp;
     $("#player-result").fadeOut().html("");
     $("#enemy-result").fadeOut().html("");
     $(".enemy-attack").fadeOut();
     $(".player-attack").fadeOut();
+
+    // Takes user back to start game & shop buttons
+
     $(".restart").fadeToggle("slow", function() {
       $("#start-game").fadeIn("slow");
       $(".shop-div").fadeIn("slow");
@@ -171,10 +219,16 @@ $(document).ready(function() {
   // Shop
 
   $("#shop").click(function() {
+
+    // Hides start game and displays shops 
+
     $("#start-game").hide();
     $(".shop-div").fadeOut("slow");
     $(".player-max").text(player.maxHp);
     $(".player-power").text(player.power);
+
+    // Sets and displays upgrade cost 
+
     var hpCost = upgradeAmount(player.upgradeHp);
     $(".hp-cost").text(hpCost);
     var powerCost = upgradeAmount(player.upgradePower);
@@ -185,6 +239,9 @@ $(document).ready(function() {
   });
 
   $("#buy-hp").click(function() {
+
+    // If buyUpgrade function is complete, peforms and displays the upgrade
+
     if (buyUpgrade(".hp-cost", player.maxHp)) {
       player.maxHp += 10;
       $(".player-max").text(player.maxHp);
@@ -195,7 +252,7 @@ $(document).ready(function() {
   });
 
   $("#buy-power").click(function() {
-    if (buyUpgrade(".hp-cost", player.power)) {
+    if (buyUpgrade(".power-cost", player.power)) {
       player.power += 2;
       $(".player-power").text(player.power);
       player.upgradePower++;
@@ -205,26 +262,45 @@ $(document).ready(function() {
   });
 
   function buyUpgrade(x, y) {
+
+    // Gets upgrade cost from button press
+
     var cost = $(x).text();
+
+    // Checks if player has enough gold
+
     if (player.gold >= cost) {
       var purchaseCheck = confirm("Buy upgrade for " + cost + " Gold?");
+
+      // If confirmed removes gold from player amount
+
       if (purchaseCheck == true) {
         player.gold -= cost;
         $(".gold-meter").html(player.gold);
         return true;
       }
+
+      // If player clicks no on confirm
+
       else {
         alert("Upgrade not purchased");
       }
+
+      // If player doesn't have enough gold
+
     }
     else {
       alert("You don't have enough Gold!");
     }
   }
 
+  // Sets upgrade amount
+
   function upgradeAmount(x) {
     return x * 250;
   }
+
+  // Back button to start game screen
 
   $("#shop-back").click(function() {
     $(".shop-content").fadeOut("slow");
@@ -236,21 +312,23 @@ $(document).ready(function() {
 
   // Helper functions 
 
+  // getDieRoll takes amount of "sides" as a parameter
+
   function getDiceRoll(x) {
     return Math.floor(Math.random() * x) + 1;
-  }
-
-  function getDieResult(x) {
-    return parseInt($(x).text());
   }
 
   function attack(base, power) {
     return base + power;
   }
+  
+  // Checker for endgame
 
   function areYouDead(hp) {
     return hp <= 0;
   }
+  
+  // Below functions take player.kills as a parameter to randomise enemy stats everygame
 
   function setEnemyHealth(kills) {
     var base = 100;
@@ -269,17 +347,19 @@ $(document).ready(function() {
     var die2 = getDiceRoll(b);
     return die1 + die2;
   }
+  
+  // Adds gold to players purse 
 
-  function earnGold(hp) {
-    return player.gold += hp;
+  function earnGold(x) {
+    return player.gold += x;
   }
-
-  // Display Helpers 
-
 
   // Save System
 
   $("#save-button").click(function() {
+    
+    // Confirms if player wants to save progress
+    
     var saveCheck = confirm("Saving will overwrite " + player.name + "'s save, press OK to confirm");
     if (saveCheck == true) {
       save();
@@ -290,13 +370,23 @@ $(document).ready(function() {
   });
 
   $("#load-button").click(function() {
+    
+    // Confirms player wants to load local save
+    
     var loadCheck = confirm("Load your save file? (This will overwrite your current save)");
     if (loadCheck == true) {
       load();
+      
+      // Loads from local storage and sets player stats
+      
+      
       $(".nav-login").fadeIn("slow");
       $(".kill-meter").text(player.kills);
       $(".gold-meter").text(player.gold);
       $(".p-name").text(player.name);
+      
+      // Bypasses name entry and brings user to start game
+
       $("#name-entry").fadeOut("slow", function() {
         $(".hide-on-start").fadeIn("slow");
         $(".shop-div").fadeIn("slow");
@@ -308,6 +398,9 @@ $(document).ready(function() {
   });
 
   function save() {
+    
+    // Stores player info as JSON and saves to local storage
+    
     var save = {
       playerName: player.name,
       playerKills: player.kills,
@@ -321,19 +414,24 @@ $(document).ready(function() {
   }
 
   function load() {
+    
+    // Retrives from local storage
+    
     var saveGame = JSON.parse(localStorage.getItem("save"));
     if (saveGame != null && saveGame != undefined) {
       player.name = saveGame.playerName;
       player.kills = saveGame.playerKills;
       player.gold = saveGame.playerGold;
       player.power = saveGame.playerPower;
-      player.maxHP = saveGame.playerHp;
+      player.maxHp = saveGame.playerHp;
       player.upgradeHp = saveGame.upgradeHp;
       player.upgradePower = saveGame.upgradePower;
     }
   }
 
   // Die Rolls
+  
+  // Below are functions for the "dice.html" page, which is mostly for when I play Dudgeons and dragons and forget my dice! 
 
   $("#rollD4").click(function() {
     var result = getDiceRoll(4);
@@ -366,6 +464,10 @@ $(document).ready(function() {
   });
 
   // Die Totals
+
+  function getDieResult(x) {
+    return parseInt($(x).text());
+  }
 
   $("#totalButton").click(function() {
 

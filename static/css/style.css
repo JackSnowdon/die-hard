@@ -33,6 +33,10 @@
 
 /* NavBar */
 
+.nav-login {
+    padding-top: 2px;
+}
+
 .navbar li a {
     color: white;
     text-align: center;
