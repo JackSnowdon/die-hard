@@ -1,5 +1,9 @@
 window.localStorage;
 
+//var $ = function() {
+//  return 1 + 1;
+//};
+
 $(document).ready(function() {
   // Global Vars
 
@@ -8,8 +12,8 @@ $(document).ready(function() {
   player.currentHp = 100;
   player.power = 10;
   player.kills = 0;
-  player.gold = 0;
-  player.upgradeHP = 1;
+  player.gold = 250;
+  player.upgradeHp = 1;
   player.upgradePower = 1;
 
   var enemy = new Object();
@@ -26,7 +30,7 @@ $(document).ready(function() {
 
     // Checks name has value (Trimmed in case of whitespace)
 
-    var playerName = $("#player-name").val()
+    var playerName = $("#player-name").val();
 
     if ($.trim(playerName) == '') {
       alert('You surely must have a name!');
@@ -60,7 +64,7 @@ $(document).ready(function() {
     $(".shop-div").hide();
     $("#start-game").hide();
     $(".player-max").text(player.maxHp);
-    $("#player-current").text(player.currentHp);
+    $("#player-current").text(player.maxHp);
     $("#enemy-max").text(enemy.maxHp);
     $("#enemy-current").text(enemy.currentHp);
     $(".player-health").fadeIn("slow");
@@ -73,7 +77,7 @@ $(document).ready(function() {
 
 
   $("#attack-roll").click(function() {
-    $("#attack-roll").attr("disabled", true)
+    $("#attack-roll").attr("disabled", true);
 
     // Player Turn
 
@@ -132,7 +136,7 @@ $(document).ready(function() {
       // Checks if player is dead and display health as 0
 
       if (areYouDead(player.currentHp)) {
-        $("#player-current").html(0)
+        $("#player-current").html(0);
         let goldDrop = getDiceRoll(enemy.currentHp);
         earnGold(goldDrop);
         $(".gold-meter").html(player.gold);
@@ -171,7 +175,7 @@ $(document).ready(function() {
     $(".shop-div").fadeOut("slow");
     $(".player-max").text(player.maxHp);
     $(".player-power").text(player.power);
-    var hpCost = upgradeAmount(player.upgradeHP);
+    var hpCost = upgradeAmount(player.upgradeHp);
     $(".hp-cost").text(hpCost);
     var powerCost = upgradeAmount(player.upgradePower);
     $(".power-cost").text(powerCost);
@@ -181,11 +185,23 @@ $(document).ready(function() {
   });
 
   $("#buy-hp").click(function() {
-    buyUpgrade(".hp-cost", player.maxHp);
+    if (buyUpgrade(".hp-cost", player.maxHp)) {
+      player.maxHp += 10;
+      $(".player-max").text(player.maxHp);
+      player.upgradeHp++;
+      var hpCost = upgradeAmount(player.upgradeHp);
+      $(".hp-cost").text(hpCost);
+    }
   });
 
   $("#buy-power").click(function() {
-    buyUpgrade(".power-cost", player.power);
+    if (buyUpgrade(".hp-cost", player.power)) {
+      player.power += 2;
+      $(".player-power").text(player.power);
+      player.upgradePower++;
+      var powerCost = upgradeAmount(player.upgradePower);
+      $(".power-cost").text(powerCost);
+    }
   });
 
   function buyUpgrade(x, y) {
@@ -194,8 +210,10 @@ $(document).ready(function() {
       var purchaseCheck = confirm("Buy upgrade for " + cost + " Gold?");
       if (purchaseCheck == true) {
         player.gold -= cost;
-        
-      } else {
+        $(".gold-meter").html(player.gold);
+        return true;
+      }
+      else {
         alert("Upgrade not purchased");
       }
     }
@@ -207,6 +225,14 @@ $(document).ready(function() {
   function upgradeAmount(x) {
     return x * 250;
   }
+
+  $("#shop-back").click(function() {
+    $(".shop-content").fadeOut("slow");
+    setTimeout(function() {
+      $("#start-game").fadeIn("slow");
+      $(".shop-div").fadeIn("slow");
+    }, 1000);
+  });
 
   // Helper functions 
 
@@ -285,7 +311,11 @@ $(document).ready(function() {
     var save = {
       playerName: player.name,
       playerKills: player.kills,
-      playerGold: player.gold
+      playerGold: player.gold,
+      playerPower: player.power,
+      playerHp: player.maxHp,
+      upgradeHp: player.upgradeHp,
+      upgradePower: player.upgradePower
     };
     localStorage.setItem("save", JSON.stringify(save));
   }
@@ -296,6 +326,10 @@ $(document).ready(function() {
       player.name = saveGame.playerName;
       player.kills = saveGame.playerKills;
       player.gold = saveGame.playerGold;
+      player.power = saveGame.playerPower;
+      player.maxHP = saveGame.playerHp;
+      player.upgradeHp = saveGame.upgradeHp;
+      player.upgradePower = saveGame.upgradePower;
     }
   }
 
