@@ -112,6 +112,20 @@
     background-size: contain;
 }
 
+#start-game {
+    background: url(../imgs/bully-minion.png);
+    background-size: contain;
+}
+
+#shop {
+    background: url(../imgs/hanging-sign.png);
+    background-size: contain;
+}
+
+#restart {
+    background: url(../imgs/cycle.png);
+    background-size: contain;
+}
 /* Die Rolls */
 
 .die-value {
