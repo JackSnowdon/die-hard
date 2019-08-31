@@ -126,6 +126,11 @@
     background: url(../imgs/cycle.png);
     background-size: contain;
 }
+
+#shop-back {
+    background: url(../imgs/sideswipe.png);
+    background-size: contain;
+}
 /* Die Rolls */
 
 .die-value {
