@@ -106,7 +106,7 @@ There was an issue with the Fight or Shop buttons not hiding when combat began, 
 
 ## Deployment
 
-The code is hosted on [Github](https://github.com/JackSnowdon/spellbook) with a live version being hosted on [GitHub Pages](https://jacksnowdon.github.io/die-hard/) 
+The code is hosted on [Github](https://github.com/JackSnowdon/die-hard) with a live version being hosted on [GitHub Pages](https://jacksnowdon.github.io/die-hard/) 
 
 I built the code on AWS Cloud9, originally facing issues pushing to github, however I have used the following commands to overcome any issues:
 
