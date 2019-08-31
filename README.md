@@ -19,24 +19,24 @@ To navigate the games content, icons have been used in lieu of buttons, to offer
 ### User Stories
 
 #### User Journey 
-*New users enter their player name
-*Returning players click on the load icon to restore progress
-*Player is taken to shop or fight
-*Player heads to shop
-*Can exchange gold for HP or Power upgrade
-*Once finished, back button to shop or fight
-*Player chooses fight and attacks using sword button
-*Turn based combat (10% Critical change)
-*Results displayed and taken to restart screen
-*Players can save content, or be taken back to the shop or fight screen
+* New users enter their player name
+* Returning players click on the load icon to restore progress
+* Player is taken to shop or fight
+* Player heads to shop
+* Can exchange gold for HP or Power upgrade
+* Once finished, back button to shop or fight
+* Player chooses fight and attacks using sword button
+* Turn based combat (10% Critical change)
+* Results displayed and taken to restart screen
+* Players can save content, or be taken back to the shop or fight screen
 
 ### Wireframes
 
 As all gameflow is handled on a single html page, the wireframes reflect the flow of the game
 
-* [Start](static/wireframes/Start.png)
-* [Middle](static/wireframes/Middle.png)
-* [End](static/wireframes/End.png)
+* [Start](static/wireframes/start.png)
+* [Middle](static/wireframes/middle.png)
+* [End](static/wireframes/end.png)
 
 ## Features
 ### Existing Features
